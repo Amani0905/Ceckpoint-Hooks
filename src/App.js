@@ -4,19 +4,24 @@ import Add from './components/Add';
 import MovieList from './components/MovieList';
 import Search from './components/Search';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { v4 as uuidv4 } from 'uuid';
+import { Routes,Route } from "react-router-dom";
+import Trailer from './components/Trailer';
 
 function App() {
   const [keyword, setKeyword] = useState("")
   const [star, setStar] = useState(1)
   const [movies,setMovies] = useState([
     {
-        title:'The OA',
+        title:'THE OA',
         description:'The series is about Prairie Johnson, an adopted young woman who resurfaces after having been missing for seven years. Upon her return, Prairie calls herself "the OA" (for "original angel"), has scars on her back, and can see, despite having been blind when she disappeared.',
         posterURL:"https://fr.web.img5.acsta.net/pictures/17/01/16/14/55/202749.jpg",
         year:'2016-2019',
         type:'TV Series',
         genre:'Mystery|Drama|Supernatural Fiction',
         rate:5,
+        trailerlink: "https://www.youtube.com/embed/DvHJtez2IlY",
+        id:uuidv4(),
         
     },
     {
@@ -27,6 +32,8 @@ function App() {
         type:'Movie',
         genre:'Adventure|Comedy|Drama',
         rate: 4,
+        trailerlink:"https://www.youtube.com/embed/qS2NtbEoIc8",
+        id:uuidv4(),
 
     },
     {
@@ -37,6 +44,8 @@ function App() {
         type:'TV Series',
         genre:'Drama|Sci-Fiction',
         rate: 2,
+        trailerlink: "https://www.youtube.com/embed/dVLiDETfx1c",
+        id:uuidv4(),
 
     },
     {
@@ -47,6 +56,8 @@ function App() {
         type:'Movie',
         genre:'Adventure|Biography|Drama',
         rate:5,
+        trailerlink: "https://youtu.be/XZG1FzyB8DI",
+        id:uuidv4(),
 
     },
     {
@@ -57,6 +68,8 @@ function App() {
         type:'TV Series',
         genre:'Drama',
         rate:4,
+        trailerlink: "https://youtu.be/oZn3qSgmLqI",
+        id:uuidv4(),
 
     },
     {
@@ -67,6 +80,8 @@ function App() {
         type:'Movie',
         genre:'Drama|Mistery',
         rate: 3,
+        trailerlink: "https://youtu.be/4TZb7YfK-JI",
+        id:uuidv4(),
 
     },
     {
@@ -77,6 +92,8 @@ function App() {
         type:'Movie',
         genre:'Biography|Romance|Drama',
         rate:4,
+        trailerlink: "https://youtu.be/Salz7uGp72c",
+        id:uuidv4(),
     }
     
 ])
@@ -99,8 +116,12 @@ const addMovie = (newMovies) => {
       <span style={{color:'white',fontSize:'x-large',textAlign:'center',fontWeight:'bold',fontFamily:'Montserrat'}}>BERRY AND CHERRY VISION </span>
       <Add addMovie={addMovie} />
       </nav>
-      <MovieList movies={movies.filter(el=>el.rate>=star && el.title.toLowerCase().includes(keyword.trim().toLowerCase()))}/>
       
+      <Routes>
+        <Route path='/' element={<MovieList movies={movies.filter(el=>el.rate>=star && el.title.toLowerCase().includes(keyword.trim().toLowerCase()))}/>} />
+        <Route path='/movie/:id' element={<Trailer mv={movies}/>} />
+        <Route path='/' element={<MovieList movies={movies.filter(el=>el.rate>=star && el.title.toLowerCase().includes(keyword.trim().toLowerCase()))}/>} />
+      </Routes>
     </div>
   );
 }

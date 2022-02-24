@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
 const MovieCard = ({mv}) => {
   return (
@@ -6,7 +7,8 @@ const MovieCard = ({mv}) => {
      <div className="movie_card" id="bright">
   <div className="info_section">
     <div className="movie_header">
-      <img className="locandina" src={mv.posterURL}/>
+    <Link to={`/movie/${mv.id}`}>
+      <img className="locandina" src={mv.posterURL}/></Link>
       <h1>{mv.title}</h1>
       <h4>{mv.year}</h4>
       <span className="minutes">{mv.type}</span>
@@ -26,7 +28,7 @@ const MovieCard = ({mv}) => {
           starCount={5}
           value={mv.rate}
         />
-        <li><i className="material-icons">star</i></li>
+        
         
       </ul>
     </div>
